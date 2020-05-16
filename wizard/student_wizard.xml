@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<odoo>
+    <!-- Form View for Student -->
+    <record id="student_wizard_action" model="ir.actions.act_window">
+        <field name="name">Set Student Grade</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">student.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <record id="student_course_wizard_form" model="ir.ui.view">
+        <field name="name">Student Wizard Form</field>
+        <field name="model">student.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="grade" />
+                </group>
+                <footer>
+                    <button string="Confirm" name="set_grade" type="object" class="btn-primary" />
+                    <button string="Cancel" class="btn-default" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>

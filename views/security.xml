@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record model="ir.module.category" id="module_academy_mgmt">
+        <field name="name">Academy Mgmt</field>
+    </record>
+
+    <record id="group_user" model="res.groups">
+        <field name="name">User</field>
+        <field name="category_id" ref="module_academy_mgmt" />
+    </record>
+
+    <record id="group_advisor" model="res.groups">
+        <field name="name">Advisor</field>
+        <field name="category_id" ref="module_academy_mgmt" />
+        <field name="implied_ids" eval="[(4, ref('academy_module.group_user'))]" />
+    </record>
+
+    <record id="group_admin" model="res.groups">
+        <field name="name">Administrator</field>
+        <field name="category_id" ref="module_academy_mgmt" />
+        <field name="implied_ids" eval="[(4, ref('academy_module.group_advisor'))]" />
+    </record>
+</odoo>

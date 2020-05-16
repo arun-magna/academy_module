@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<odoo>
+    <!-- Form View for Course -->
+    <record id="course_form" model="ir.ui.view">
+        <field name="name">Course</field>
+        <field name="model">academy.course</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <group>
+                        <field name="course_sequence" readonly="1"/>
+                        <field name="name"/>
+                    </group>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree View for Course -->
+    <record id="course_tree" model="ir.ui.view">
+        <field name="name">Course</field>
+        <field name="model">academy.course</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="course_sequence" readonly="1"/>
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Action for Course -->
+    <record id="course_action" model="ir.actions.act_window">
+        <field name="name">Course</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">academy.course</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Menu -->
+    <menuitem name="Course" id="course_menu" sequence="20" parent="student_menu" action="course_action"/>
+</odoo>

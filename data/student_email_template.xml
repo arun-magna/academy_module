@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="student_email_template" model="mail.template">
+            <field name="name">Student Email Template</field>
+            <field name="email_from">${user.email}</field>
+            <field name="subject">Student ${object.first_name}</field>
+            <field name="lang">${object.lang}</field>
+            <field name="model_id" ref="model_academy_student"/>
+            <field name="auto_delete" eval="True"/>
+            <field name="body_html">
+                <![CDATA[
+                <b>Student:</b> ${object.first_name} ${object.last_name} <br/>
+                <b>Advisor:</b> ${object.advisor.name} <br/>
+                <b>Major:</b> ${object.major} <br/>
+                <br/>
+                <b>Courses:</b>
+                <ul>
+                % for course in object.course_ids:
+                    <li>${course.name}</li>
+                % endfor
+                </ul>
+                <br/>
+                ]]>
+            </field>
+        </record>
+    </data>
+</odoo>

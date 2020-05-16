@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<odoo>
+
+    <record id="student_search_view" model="ir.ui.view">
+        <field name="name">Students Search</field>
+        <field name="model">academy.student</field>
+        <field name="arch" type="xml">
+            <search string="Students Search">
+                <!-- Enable Group -->
+                <group expand="1" string="Group by">
+                    <filter string="Advisor" name="group_by_advisor" context="{'group_by':'advisor'}" />
+                </group>
+
+                <!-- Enable Filters -->
+                <filter string="EE Students" name="filter_by_ee" domain="[('major','=','EE')]" />
+                <filter string="CS Students" name="filter_by_cs" domain="[('major','=','CS')]" />
+            </search>
+        </field>
+        <field name="name">Students Search</field>
+    </record>
+
+    <!-- Form View for Student -->
+    <record id="student_form" model="ir.ui.view">
+        <field name="name">Students</field>
+        <field name="model">academy.student</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <header>
+                        <field name="status" widget="statusbar"/>
+
+                        <button name="%(academy_module.student_wizard_action)d" type="action"
+                                string="Set Grade" class="oe_highlight" />
+
+                        <!-- Button: Set Inactive -->
+                        <button name="set_inactive" string="Set Inactive"
+                                type="object"
+                                class="oe_highlight"
+                                attrs="{'invisible':[('status','=','inactive')]}"/>
+
+                        <!-- Button: Set Active -->
+                        <button name="set_active" string="Set Active"
+                                type="object"
+                                class="oe_highlight"
+                                attrs="{'invisible':[('status','=','active')]}"/>
+                    </header>
+
+                    <widget name="web_ribbon" text="Inactive" bg_color="bg-danger"
+                            attrs="{'invisible':[('status','!=','inactive')]}" />
+
+                    <group>
+                        <group>
+                            <field name="first_name" required="1" />
+                            <field name="last_name" required="1" />
+                            <field name="advisor" required="1"/>
+                        </group>
+
+                        <group>
+                            <field name="major"/>
+                            <field name="grade"/>
+                            <field name="arrears"/>
+                        </group>
+
+                        <group>
+                            <field name="course_count" />
+                            <field name="course_ids" widget="many2many_tags"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree View for Student -->
+    <record id="student_tree" model="ir.ui.view">
+        <field name="name">Students</field>
+        <field name="model">academy.student</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="first_name"/>
+                <field name="last_name"/>
+                <field name="major"/>
+                <field name="arrears"/>
+                <field name="advisor"/>
+                <field name="course_ids"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Action for Student -->
+    <record id="student_action" model="ir.actions.act_window">
+        <field name="name">Students</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">academy.student</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{"search_default_filter_by_ee":1}</field>
+    </record>
+
+    <!-- Menu -->
+    <menuitem name="Students" id="student_menu" sequence="200" action="student_action"/>
+</odoo>

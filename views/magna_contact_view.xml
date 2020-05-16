@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<odoo>
+    <!-- Form View for Magna Contact (customizes Contact) -->
+    <record id="magna_contact_inherited_contact" model="ir.ui.view">
+        <field name="name">Magna Contact</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form" />
+
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='website']" position="before">
+                <field name="twitter_handle"/>
+            </xpath>
+
+            <xpath expr="//field[@name='vat']" position="replace">
+                <field name="subtitle"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
